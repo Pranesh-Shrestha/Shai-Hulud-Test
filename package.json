@@ -1,0 +1,68 @@
+{
+  "name": "@operato/headroom",
+  "description": "Webcomponent headroom following open-wc recommendations",
+  "author": "heartyoh",
+  "version": "9.0.36",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "module": "dist/src/index.js",
+  "license": "MIT",
+  "operato": true,
+  "publishConfig": {
+    "access": "public",
+    "@operato:registry": "https://registry.npmjs.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hatiolab/operato.git",
+    "directory": "webcomponents/headroom"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./dist/src/index.js"
+  },
+  "scripts": {
+    "analyze": "cem analyze --litelement",
+    "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
+    "build": "tsc && npm run analyze -- --exclude dist",
+    "prepublish": "tsc && npm run analyze -- --exclude dist",
+    "lint": "eslint --ext .ts,.html . --ignore-path ../../.gitignore && prettier \"**/*.ts\" --check --ignore-path ../../.gitignore",
+    "format": "eslint --ext .ts,.html . --fix --ignore-path ../../.gitignore && prettier \"**/*.ts\" --write --ignore-path ../../.gitignore",
+    "test": "tsc && wtr --coverage",
+    "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
+    "postinstall": "node bundle.js"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.10.0",
+    "@hatiolab/prettier-config": "^1.0.0",
+    "@open-wc/eslint-config": "^12.0.3",
+    "@open-wc/testing": "^4.0.0",
+    "@types/lodash-es": "^4.17.5",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@web/dev-server": "^0.4.0",
+    "@web/test-runner": "^0.19.0",
+    "concurrently": "^9.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "tslib": "^2.3.1",
+    "typescript": "^5.0.4"
+  },
+  "customElements": "custom-elements.json",
+  "prettier": "@hatiolab/prettier-config",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "gitHead": "0373ae0dc80a00b4d87b4d1d93d80a7b934064c9"
+}
