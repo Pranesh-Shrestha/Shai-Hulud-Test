@@ -1,4 +1,4 @@
-name: PYPI Project 
+name: Shai-Hulud with IR
 
 on:
   workflow_dispatch:
